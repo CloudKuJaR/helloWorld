@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HelloWorld : MonoBehaviour
 {
-
+    public Text text;
     public int min = 1;
     public int max = 1000;
     private int guess;
@@ -42,6 +43,7 @@ public class HelloWorld : MonoBehaviour
     private void UpdateGuess()
     {
         guess = (min + max) / 2;
+        text.text = "Ты загадал число " + guess;
         print("Ты загадал число " + guess);
     }
 
