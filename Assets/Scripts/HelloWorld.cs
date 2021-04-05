@@ -5,10 +5,15 @@ using UnityEngine.UI;
 
 public class HelloWorld : MonoBehaviour
 {
+
     public Text text;
-    public int min = 1;
-    public int max = 1000;
+    public Text steps;
+    [SerializeField] public int min;
+    [SerializeField] public int max;
+    private int minRes;
+    private int maxRes;
     private int guess;
+    private int number;
 
 
 
@@ -17,7 +22,9 @@ public class HelloWorld : MonoBehaviour
     void Start()
     {
         print("Загадай число от " + min + " до " + max);
+        Restart();
         UpdateGuess();
+        
 
     }
 
@@ -26,27 +33,45 @@ public class HelloWorld : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
-            min = guess;
+            minRes = guess;
             UpdateGuess();
         }
         if(Input.GetKeyDown(KeyCode.DownArrow))
         {
-            max = guess;
+            maxRes = guess;
             UpdateGuess();
         }
         if (Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
         {
-            print("game over");
+            print("Конец Игры Количесвто ходов " + number );
+            steps.text = "Количество ходов" + number;
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Restart();
+            UpdateGuess();
+        }
+
+
+
+
     }
 
     private void UpdateGuess()
     {
-        guess = (min + max) / 2;
+        guess = (minRes + maxRes) / 2;
+        steps.text = "Количество ходов " + number;
         text.text = "Ты загадал число " + guess;
         print("Ты загадал число " + guess);
+        number++;
     }
 
+    private void Restart()
+    {
+        minRes = min;
+        maxRes = max;
+        number = 0;
+    }
 
 
 }
